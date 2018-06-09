@@ -24,7 +24,6 @@ public class BaseTest{
 
         logic.enterInInput();
 
-
     }
 
 

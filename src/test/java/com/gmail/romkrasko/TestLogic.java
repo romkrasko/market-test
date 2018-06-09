@@ -1,15 +1,16 @@
 package com.gmail.romkrasko;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.interactions.Actions;
 
+
+import java.util.List;
 
 import static com.gmail.romkrasko.BrowserFactory.*;
 
 public class TestLogic {
 
     private BrowserFactory singleton = BrowserFactory.getInstance();
-    private JavascriptExecutor js = (JavascriptExecutor) driver;
 
 
     public void goYandex() {
@@ -18,7 +19,7 @@ public class TestLogic {
     }
 
     public void checkCheckBox(){
-        WebElement check = driver.findElement((By.xpath("//label[@class='_1e7iX1B2oW'][@for='delivery-included-filter']")));//"delivery-included-filter  #local-offers-first
+        WebElement check = driver.findElement((By.xpath("//label[@class='_1e7iX1B2oW'][@for='delivery-included-filter']")));
         scrollToElement(check);
         check.click();
         //js = (JavascriptExecutor) driver;
@@ -40,13 +41,18 @@ public class TestLogic {
     }
 
     public void selectDropDown() {
-        WebElement drop = driver.findElement(By.xpath("//span[@class='select select_size_s select_theme_normal b-pager__select i-bem select_js_inited']"));
+        WebElement drop = driver.findElement(By.cssSelector("div.n-pager.i-bem.n-pager_js_inited span button"));
+        WebElement qqq = driver.findElement(By.xpath("//div[@class='n-popular-recipes-list__item']"));
+        scrollToElement(qqq);
+        drop.click();
 
-        scrollToElement(drop);
+        WebElement value12 = driver.findElement(By.xpath("//div[@class='popup__content']/div/div/span"));
+        value12.click();
 
-        Select dropDown = new Select(driver.findElement(By.xpath("//select")));
-        dropDown.selectByVisibleText("Показывать по 12");
+
+
     }
+
 
     public void enterInInput(){
         WebElement input = driver.findElement(By.xpath("//input[@class='_2yK7W3SWQ- _1d02bPcWht']"));
@@ -58,9 +64,11 @@ public class TestLogic {
 
 
     public void scrollToElement(WebElement element){
-        Point point = element.getLocation();
-        js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollTo("+point.getX()+","+point.getY()+");");
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element);
+        actions.perform();
+
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
