@@ -18,10 +18,11 @@ public class TestLogic {
     }
 
     public void checkCheckBox(){
-        WebElement check = driver.findElement((By.cssSelector("#delivery-included-filter")));//"delivery-included-filter  #local-offers-first
+        WebElement check = driver.findElement((By.xpath("//label[@class='_1e7iX1B2oW'][@for='delivery-included-filter']")));//"delivery-included-filter  #local-offers-first
         scrollToElement(check);
-        js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();",check);
+        check.click();
+        //js = (JavascriptExecutor) driver;
+        //js.executeScript("arguments[0].click();",check);
 
         try {
             Thread.sleep(3000);
@@ -31,10 +32,11 @@ public class TestLogic {
     }
 
     public void checkRadio(){
-        WebElement radioButton = driver.findElement(By.cssSelector("#qrfrom_2"));
+        WebElement radioButton = driver.findElement(By.xpath("//li/div/label[@class='_2qeJ9otxLk'][@for='qrfrom_2']"));
         scrollToElement(radioButton);
-        js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();",radioButton);
+        radioButton.click();
+        //js = (JavascriptExecutor) driver;
+        //js.executeScript("arguments[0].click();",radioButton);
     }
 
     public void selectDropDown() {
